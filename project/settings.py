@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "users",
     "rest_framework",
     "stations",
+    "bookmarks",
 ]
 
 REST_FRAMEWORK = {

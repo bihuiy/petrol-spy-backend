@@ -3,11 +3,13 @@ from .models import Station
 from rest_framework.response import Response
 from .serializers.common import StationSerializer
 from rest_framework.exceptions import NotFound
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 
 # Create your views here.
 # Path: /stations
 class StationListView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # Index route
     def get(self, request):
@@ -18,6 +20,7 @@ class StationListView(APIView):
 
 # Path: /stations/<int:pk>
 class StationDetailView(APIView):
+    permission_classes = [IsAuthenticated]
 
     # Show route
     def get(self, request, pk):
