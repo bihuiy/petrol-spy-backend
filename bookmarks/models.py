@@ -9,7 +9,7 @@ class Bookmark(models.Model):
         related_name="owned_bookmarks",
     )
 
-    station = models.ForeignKey(to="stations.Station", on_delete=models.CASCADE)
+    bookmarked_station = models.ForeignKey(to="stations.Station", on_delete=models.CASCADE)
 
     tag = models.CharField(max_length=100, null=True, blank=True)
 
