@@ -53,7 +53,7 @@ def update_prices():
     # Update the stations table
     for station in res_data.get("stations", []):
         Station.objects.update_or_create(
-            station_id=station["stationid"],
+            station_id=station["code"],
             defaults={
                 "name": station.get("name"),
                 "brand": station.get("brand"),

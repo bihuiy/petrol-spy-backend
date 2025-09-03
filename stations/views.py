@@ -13,9 +13,23 @@ from bookmarks.serializers.common import BookmarkSerializer
 class StationListView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    # Index route - display all station's location
+    # Index route - display stations on the map as the map center changes
     def get(self, request):
-        stations = Station.objects.all()
+        # Get the bounding params
+        bbox = request.query_params.get("bbox", None)
+        if bbox:
+            left, bottom, right, top = map(
+                float, bbox.split(",")
+            )  # Use split(",") to convert string to list
+            stations = Station.objects.filter(
+                longitude__gte=left,
+                longitude__lte=right,
+                latitude__gte=bottom,
+                latitude__lte=top,
+            ).prefetch_related("prices")
+        else:
+            stations = Station.objects.all().prefetch_related("prices")
+
         serialized_stations = StationSerializer(stations, many=True)
         return Response(serialized_stations.data)
 
