@@ -36,9 +36,9 @@ class StationListView(APIView):
 
 class GetStation:
     # Helper function that gets the object or sends a 404
-    def get_station(self, pk):
+    def get_station(self, station_id):
         try:
-            return Station.objects.get(pk=pk)
+            return Station.objects.get(station_id=station_id)
         except Station.DoesNotExist as e:
             raise NotFound("Station does not exist.")
 
@@ -48,8 +48,8 @@ class StationDetailView(APIView, GetStation):
     permission_classes = [IsAuthenticated]
 
     # Show route - display a specific station's details
-    def get(self, request, pk):
-        station = self.get_station(pk)
+    def get(self, request, station_id):
+        station = self.get_station(station_id)
         serialized_station = StationSerializer(station)
         return Response(serialized_station.data)
 
@@ -59,8 +59,8 @@ class StationBookmarkView(APIView, GetStation):
     permission_classes = [IsAuthenticated]
 
     # Create route - add a station to user's bookmark
-    def post(self, request, pk):
-        station = self.get_station(pk)
+    def post(self, request, station_id):
+        station = self.get_station(station_id)
         user = request.user
         if Bookmark.objects.filter(owner=user, bookmarked_station=station).exists():
             return Response({"details": "This station is already bookmarked."})
@@ -70,8 +70,8 @@ class StationBookmarkView(APIView, GetStation):
         return Response(serialized_bookmark.data, 201)
 
     # Delete route - remove a station from user's bookmark
-    def delete(self, request, pk):
-        station = self.get_station(pk)
+    def delete(self, request, station_id):
+        station = self.get_station(station_id)
         user = request.user
         try:
             bookmark = Bookmark.objects.get(owner=user, bookmarked_station=station)
