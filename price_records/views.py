@@ -14,7 +14,9 @@ class PriceRecordListView(APIView):
     # Index route - display all price records created by this user
     def get(self, request):
         user = request.user
-        price_records = PriceRecord.objects.filter(owner=user)
+        price_records = PriceRecord.objects.filter(owner=user).select_related(
+            "bookmark"
+        )
         serialized_price_records = PriceRecordSerializer(price_records, many=True)
         return Response(serialized_price_records.data)
 
@@ -23,7 +25,7 @@ class PriceRecordListView(APIView):
         serialized_price_record = PriceRecordSerializer(data=request.data)
         serialized_price_record.is_valid(raise_exception=True)
         serialized_price_record.save()
-        return Response(serialized_price_record, 201)
+        return Response(serialized_price_record.data, 201)
 
 
 # Path: /price-records/<int:pk>/
