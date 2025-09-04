@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers.common import AuthSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
+from .serializers.tokens import TokenSerializer
 
 
 # Create your views here.
@@ -15,5 +15,5 @@ class SignUpView(APIView):
         serialized_user.save()
 
         user = User.objects.get(pk=serialized_user.data["id"])
-        refresh = RefreshToken.for_user(user)
+        refresh = TokenSerializer.get_token(user)
         return Response({"access": str(refresh.access_token)}, 201)
