@@ -14,7 +14,9 @@ class BookmarkListView(APIView):
     # Index route - display all bookmarked stations by this user
     def get(self, request):
         user = request.user
-        bookmarks = Bookmark.objects.filter(owner=user)
+        bookmarks = Bookmark.objects.filter(owner=user).select_related(
+            "bookmarked_station"
+        )
         serialized_bookmarks = BookmarkSerializer(bookmarks, many=True)
         return Response(serialized_bookmarks.data)
 
