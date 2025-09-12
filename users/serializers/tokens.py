@@ -1,5 +1,5 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .userDetail import UserDetailSerializer
+
 
 class TokenSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -10,14 +10,8 @@ class TokenSerializer(TokenObtainPairSerializer):
         token["user"] = {
             "id": user.id,
             "username": user.username,
+            "email": user.email,
+            "profileImage": str(user.profileImage.url) if user.profileImage else None,
         }
 
         return token
-
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        
-        serializer = UserDetailSerializer(self.user)
-        data['user'] = serializer.data
-        
-        return data

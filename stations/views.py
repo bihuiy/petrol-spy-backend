@@ -43,17 +43,6 @@ class GetStation:
             raise NotFound("Station does not exist.")
 
 
-# Path: /stations/<int:pk>/
-class StationDetailView(APIView, GetStation):
-    permission_classes = [IsAuthenticated]
-
-    # Show route - display a specific station's details
-    def get(self, request, station_id):
-        station = self.get_station(station_id)
-        serialized_station = StationSerializer(station)
-        return Response(serialized_station.data)
-
-
 # Path: /stations/<int:pk>/bookmark/
 class StationBookmarkView(APIView, GetStation):
     permission_classes = [IsAuthenticated]
