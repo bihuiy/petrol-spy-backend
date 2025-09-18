@@ -50,6 +50,7 @@ else:
     ]  # removes protocol (https://)
 
     CORS_ALLOWED_ORIGINS = [
+        "http://localhost:5173",
         env("DEPLOYED_FRONTEND_URL"),  # Deployed frontend url only
     ]
 
