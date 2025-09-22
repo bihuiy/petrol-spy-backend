@@ -12,7 +12,7 @@ With React on the frontend and Django REST Framework on the backend, this projec
 
 - View price history for each bookmarked station to make informed decisions.
 
-![Homepage Screenshot](./src/assets/PetrolSpyHomepage.png)
+![Homepage Screenshot](./assets/PetrolSpyHomepage.png)
 
 ## Deployment link
 
@@ -133,7 +133,7 @@ I started by writing user stories to clarify what features the app needed and wh
 
 I designed the database schema early on, identifying the key entities (users, stations, price, bookmarks, price_records) and their relationships.
 
-![ERD](./src/assets/ERD.png)
+![ERD](./assets/ERD.png)
 
 ### 3. Routing Table
 
@@ -153,7 +153,7 @@ I mapped out all API endpoints to ensure a consistent RESTful design.
 
 ### 4. Wireframes
 
-![Wireframe](./src/assets/Wireframe.png)
+![Wireframe](./assets/Wireframe.png)
 
 ### 5. Trello Board
 
@@ -168,7 +168,7 @@ Below is a screenshot of my Trello board, which includes columns for **To Do**, 
 
 Below is an overview of my development timeline mapped to these stages:
 
-![Trello](./src/assets/Trello.png)
+![Trello](./assets/Trello.png)
 
 > A detailed day-by-day breakdown of the development process can be found in the **Build/Code Process** section below.
 
