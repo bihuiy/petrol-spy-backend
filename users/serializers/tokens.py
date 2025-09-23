@@ -43,7 +43,7 @@ class TokenSerializer(TokenObtainPairSerializer):
             "id": user.id,
             "username": user.username,
             "email": user.email,
-            "profileImage": str(user.profileImage.url) if user.profileImage else None,
+            "profileImage": user.profileImage,
         }
 
         return token
