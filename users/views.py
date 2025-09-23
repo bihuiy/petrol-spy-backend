@@ -10,7 +10,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 # Sign up
 # Path: /users/sign-up
 class SignUpView(APIView):
-    parser_classes = [MultiPartParser, FormParser]
+    
 
     def post(self, request):
         serialized_user = AuthSerializer(data=request.data)
@@ -20,3 +20,7 @@ class SignUpView(APIView):
         user = User.objects.get(pk=serialized_user.data["id"])
         refresh = TokenSerializer.get_token(user)
         return Response({"access": str(refresh.access_token)}, 201)
+
+
+
+""" parser_classes = [MultiPartParser, FormParser] """
