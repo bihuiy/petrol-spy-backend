@@ -12,7 +12,7 @@ Users can click on any marker to open a popup showing detailed station informati
 Once logged in, users can bookmark their frequently visited stations and view them on a dedicated Bookmark Page.  
 From there, users can create “price snapshots” of bookmarked stations and save them to the Price Record Page. This allows them to build a price history and make data-driven decisions about when to refuel.
 
-![Homepage Screenshot](./src/assets/PetrolSpyHomepage.png)
+![Homepage Screenshot](./assets/PetrolSpyHomepage.png)
 
 ## Deployment link
 
@@ -134,7 +134,7 @@ I started by writing user stories to clarify what features the app needed and wh
 
 I designed the database schema early on, identifying the key entities (users, stations, price, bookmarks, price_records) and their relationships.
 
-![ERD](./src/assets/ERD.png)
+![ERD](./assets/ERD.png)
 
 ### 3. Routing Table
 
@@ -154,7 +154,7 @@ I mapped out all API endpoints to ensure a consistent RESTful design.
 
 ### 4. Wireframes
 
-![Wireframe](./src/assets/Wireframe.png)
+![Wireframe](./assets/Wireframe.png)
 
 ### 5. Trello Board
 
@@ -169,7 +169,7 @@ Below is a screenshot of my Trello board, which includes columns for **To Do**, 
 
 Below is an overview of my development timeline mapped to these stages:
 
-![Trello](./src/assets/Trello.png)
+![Trello](./assets/Trello.png)
 
 > A detailed day-by-day breakdown of the development process can be found in the **Build/Code Process** section below.
 
