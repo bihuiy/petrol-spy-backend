@@ -57,11 +57,11 @@ jobs:
         env:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
-          heroku run --app $HEROKU_APP_NAME ”python manage.py migrate”
+          heroku run --app $HEROKU_APP_NAME "python manage.py migrate"
 
       # Collect static files
       - name: Collect static files
         env:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
-          heroku run --app $HEROKU_APP_NAME “python manage.py collectstatic --noinput”
+          heroku run --app $HEROKU_APP_NAME "python manage.py collectstatic --noinput"
