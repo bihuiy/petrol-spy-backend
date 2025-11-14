@@ -1,0 +1,47 @@
+name: Deploy to Heroku
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Django backend to Heroku
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+          pipenv install --deploy --ignore-pipfile
+
+      - name: install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+
+      - name: Login to Heroku
+        run: |
+          echo "${{ secrets.HEROKU_API_KEY }}" | heroku auth:token
+          heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
+
+      - name: Push to Heroku
+        run: |
+          git push https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git main
+
+      - name: Run Django migrations
+        run: |
+          heroku run python manage.py migrate --app ${{ secrets.HEROKU_APP_NAME }}
+
+      - name: Collect static files
+        run: |
+          heroku run python manage.py collectstatic --noinput --app ${{ secrets.HEROKU_APP_NAME }}
