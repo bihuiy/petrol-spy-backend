@@ -1,10 +1,13 @@
 name: Vivien
-on: 
- workflow_dispatch:
- push: 
-  branches: 
-   - main
-jobs: 
- HelloWorld: 
-  name: Hello World!
-  run: echo "Hello World!"
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  HelloWorld:
+    name: Hello World!
+    steps:
+      ~name: Say Hello
+      run: echo "Hello World!"
