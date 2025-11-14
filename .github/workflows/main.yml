@@ -36,13 +36,20 @@ jobs:
           echo $HEROKU_API_KEY | heroku auth:token
 
       - name: Push to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
-          git push https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git main
+          git push https://heroku:$secrets.HEROKU_API_KEY@git.heroku.com/$secrets.HEROKU_APP_NAME.git main
 
       - name: Run Django migrations
+        env:
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
-          heroku run python manage.py migrate --app ${{ secrets.HEROKU_APP_NAME }}
+          heroku run python manage.py migrate --app $secrets.HEROKU_APP_NAME
 
       - name: Collect static files
+        env:
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
         run: |
-          heroku run python manage.py collectstatic --noinput --app ${{ secrets.HEROKU_APP_NAME }}
+          heroku run python manage.py collectstatic --noinput --app $secrets.HEROKU_APP_NAME
